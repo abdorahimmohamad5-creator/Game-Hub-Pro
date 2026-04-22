@@ -3,80 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Car Racing Game</title>
+<title>Mini Game Hub</title>
 
-<!-- 🔥 إعلانك (Monetag Popunder) -->
-<script src="https://5gvci.com/act/files/tag.min.js?z=10909789" data-cfasync="false" async></script>
+<!-- 🔥 مكان إعلانك من Monetag -->
+<!-- ضع كود الإعلان هنا -->
+<!-- <script src="YOUR-AD-CODE"></script> -->
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0b1220;
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
 }
 
-.container {
-  padding: 20px;
+header{
+  background:#111827;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
 }
 
-img {
-  width: 90%;
-  border-radius: 10px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px;
+  padding:12px;
 }
 
-.play-btn {
-  background: #22c55e;
-  padding: 15px 25px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 18px;
+.card{
+  background:#1f2937;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.2s;
 }
 
-.play-btn:hover {
-  background: #16a34a;
+.card:hover{transform:scale(1.05)}
+
+.card img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
 }
 
-.back {
-  display: inline-block;
-  margin: 10px;
-  color: #60a5fa;
-  cursor: pointer;
+.name{
+  padding:8px;
+  text-align:center;
+  font-size:13px;
+}
+
+/* صفحة اللعبة */
+.game-page{
+  display:none;
+  padding:15px;
+  text-align:center;
+}
+
+.play-btn{
+  background:#22c55e;
+  padding:15px;
+  border-radius:10px;
+  display:inline-block;
+  margin-top:15px;
+  cursor:pointer;
+}
+.back{
+  color:#60a5fa;
+  cursor:pointer;
+  display:inline-block;
+  margin:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>🎮 Mini Game Hub</header>
 
-<div class="back" onclick="goHome()">⬅ Back</div>
+<!-- 🔥 الصفحة الرئيسية -->
+<div id="home" class="grid"></div>
 
-<h2>🏎️ Car Racing Game</h2>
+<!-- 🎮 صفحة اللعبة -->
+<div id="game" class="game-page">
+  <div class="back" onclick="backHome()">⬅ Back</div>
 
-<img src="https://img.crazygames.com/games/madalin-stunt-cars-2/cover-16x9.png">
+  <h2 id="gameName"></h2>
 
-<!-- 🔥 مكان إعلان إضافي (اختياري) -->
-<div style="margin:15px;">
-  <!-- ضع إعلانك هنا إذا أردت -->
-</div>
+  <img id="gameImg" width="90%">
 
-<div class="play-btn" onclick="playGame()">▶ Play Now</div>
+  <!-- 🔥 إعلان داخل اللعبة -->
+  <div style="margin:15px;">
+    <!-- ضع إعلانك هنا -->
+  </div>
 
+  <div class="play-btn" onclick="playGame()">▶ Play Now</div>
 </div>
 
 <script>
 
-function goHome(){
-  window.location.href = "index.html"; // يرجع للصفحة الرئيسية
+const games = [
+{
+  name:"Car Racing",
+  img:"https://img.crazygames.com/games/madalin-stunt-cars-2/cover-16x9.png",
+  url:"https://playsnake.org/"
+},
+{
+  name:"Snake Game",
+  img:"https://img.crazygames.com/games/snake-is/cover-16x9.png",
+  url:"https://playsnake.org/"
+},
+{
+  name:"2048 Puzzle",
+  img:"https://img.crazygames.com/games/2048/cover-16x9.png",
+  url:"https://play2048.co/"
+},
+{
+  name:"Chess",
+  img:"https://img.crazygames.com/games/chess/cover-16x9.png",
+  url:"https://www.chess.com/play/computer"
+},
+{
+  name:"Pacman",
+  img:"https://img.crazygames.com/games/pacman/cover-16x9.png",
+  url:"https://freepacman.org/"
+},
+{
+  name:"Sudoku",
+  img:"https://img.crazygames.com/games/sudoku/cover-16x9.png",
+  url:"https://sudoku.com/"
+},
+{
+  name:"Tetris",
+  img:"https://img.crazygames.com/games/tetris/cover-16x9.png",
+  url:"https://tetris.com/play-tetris"
+},
+{
+  name:"Crossy Road",
+  img:"https://img.crazygames.com/games/crossy-road/cover-16x9.png",
+  url:"https://crossyroadgame.com/"
+},
+{
+  name:"Flappy Bird",
+  img:"https://img.crazygames.com/games/flappy-bird/cover-16x9.png",
+  url:"https://flappybird.io/"
+},
+{
+  name:"Agar.io",
+  img:"https://img.crazygames.com/games/agar-io/cover-16x9.png",
+  url:"https://agar.io/"
+}
+];
+
+// توليد ألعاب إضافية خفيفة (بدون ضغط على الموقع)
+for(let i=1;i<=10;i++){
+  games.push({
+    name:"Mini Game " + i,
+    img:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300",
+    url:"https://playsnake.org/"
+  });
+}
+
+let currentGame = null;
+
+const home = document.getElementById("home");
+const gamePage = document.getElementById("game");
+
+games.forEach((g,i)=>{
+  const div = document.createElement("div");
+  div.className="card";
+
+  div.innerHTML=`
+    <img src="${g.img}" loading="lazy">
+    <div class="name">${g.name}</div>
+  `;
+
+  div.onclick=()=>{
+    currentGame=g;
+    document.getElementById("gameName").innerText=g.name;
+    document.getElementById("gameImg").src=g.img;
+
+    home.style.display="none";
+    gamePage.style.display="block";
+  };
+
+  home.appendChild(div);
+});
+
+function backHome(){
+  home.style.display="grid";
+  gamePage.style.display="none";
 }
 
 function playGame(){
-  // 💰 هنا يتم تشغيل الإعلان تلقائي (Popunder)
-  window.open("https://playsnake.org/", "_blank");
+  // 🔥 مكان الإعلان من Monetag (Popunder يشتغل هنا)
+  window.open(currentGame.url,"_blank");
 }
 
 </script>

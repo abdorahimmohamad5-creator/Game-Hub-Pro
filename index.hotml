@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Racing Game</title>
+
+<!-- 🔥 إعلانك (Monetag Popunder) -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=10909789" data-cfasync="false" async></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b1220;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}
+
+img {
+  width: 90%;
+  border-radius: 10px;
+}
+
+.play-btn {
+  background: #22c55e;
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.play-btn:hover {
+  background: #16a34a;
+}
+
+.back {
+  display: inline-block;
+  margin: 10px;
+  color: #60a5fa;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="back" onclick="goHome()">⬅ Back</div>
+
+<h2>🏎️ Car Racing Game</h2>
+
+<img src="https://img.crazygames.com/games/madalin-stunt-cars-2/cover-16x9.png">
+
+<!-- 🔥 مكان إعلان إضافي (اختياري) -->
+<div style="margin:15px;">
+  <!-- ضع إعلانك هنا إذا أردت -->
+</div>
+
+<div class="play-btn" onclick="playGame()">▶ Play Now</div>
+
+</div>
+
+<script>
+
+function goHome(){
+  window.location.href = "index.html"; // يرجع للصفحة الرئيسية
+}
+
+function playGame(){
+  // 💰 هنا يتم تشغيل الإعلان تلقائي (Popunder)
+  window.open("https://playsnake.org/", "_blank");
+}
+
+</script>
+
+</body>
+</html>
